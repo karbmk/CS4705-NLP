@@ -86,14 +86,36 @@ to test the trigram q() function (in count_freqs.py Hmm class) on the tri_prob_i
 	python viterbi.py ner_rare.counts ner_dev.dat > v_prediction_file
 to run the viterbi algorithm on ner.counts and ner_dev.dat and produce the v_prediction_file, which contains all the viterbi prediction results.
 
+3. Run:
+	python eval_ne_tagger.py ner_dev.key v_prediction_file
+to run the evaluation script on the Viterbi algorithm output.
+
+
 Part2: performance for your algorithm (including precision, recall, and F-score). 
+
+
+Output from eval_ne_tagger.py:
+
+Found 15528 NEs. Expected 5931 NEs; Correct: 536.
+
+	 	precision 	recall 		F1-Score
+Total:	 0.034518	0.090373	0.049956
+PER:	 0.034781	0.264962	0.061490
+ORG:	 0.007092	0.001495	0.002469
+LOC:	 0.037781	0.025627	0.030539
+Warning: prediction file does not contain any instances of entity type MISC.
+MISC:	 1.000000	0.000000	0.000000
 
 
 Part3: observations and comments about your experimental results. 
 
 
+My Viterbi algorithm tagger got 536 correct. It found 15528 named entities and expected 5931. Overall this is even less impressive than the simple named entity tagger. The LOC tag had the best results for all three. This tagger had a more even accuracy among the different tags. Overall, precision was about .03 (about the same as Q4), recall about .09 (much worse than Q4), and F1-Score overall was 0.04 (worse than Q4).
+
+
 Part4: any additional information that is requested in the problem.
 
+The function that computes trigram estimates is in the Hmm class of count_freqs.py, called q().
 
 
 
