@@ -281,7 +281,7 @@ class Hmm(object):
                 vresults = self.viterbi(vsent)
                 for i in range(1, len(vsent) - 1): # avoid */STOP symbols
                     print "%s %s %f" %(sent[i], vresults[i], math.log(self.pi_dict[i, vresults[i - 1], vresults[i]]))
-                print '\n'
+                print
                 # move on to the next
                 self.pi_dict.clear()
                 sent = list('*')

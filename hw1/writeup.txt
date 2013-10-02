@@ -78,17 +78,13 @@ Question 5:
 
 Part1: how to run your code step by step (make sure your code can run on CLIC). 
 
-1. Run in terminal:
-	python count_freqs.py ner_train.dat > ner.counts
-to get the original counts (without the _RARE_ keyword introduced)
-
-2. Run:
-	python p5.py tri_prob_in ner.counts > tri_prob_out
+1. Run:
+	python p5.py tri_prob_in ner_rare.counts > tri_prob_out
 to test the trigram q() function (in count_freqs.py Hmm class) on the tri_prob_in list of state trigrams.
 
-3. Run:
-	python viterbi.py ner.counts ner_dev.dat > v_prediction_file
-to run the viterbi algorithm on ner.counts and ner_dev.dat and produce the v_prediction_file
+2. Run:
+	python viterbi.py ner_rare.counts ner_dev.dat > v_prediction_file
+to run the viterbi algorithm on ner.counts and ner_dev.dat and produce the v_prediction_file, which contains all the viterbi prediction results.
 
 Part2: performance for your algorithm (including precision, recall, and F-score). 
 
