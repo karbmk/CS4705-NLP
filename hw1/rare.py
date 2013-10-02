@@ -33,9 +33,7 @@ def read_and_rare_replace(fname):
             # Each line has the format
             # word pos_tag phrase_tag ne_tag
             fields = line.split(" ")
-            emission_counts[fields[0]] += 1
-        else:
-            1 # do nothing                        
+            emission_counts[fields[0]] += 1                     
         l = infile.readline()
 
     # create a new output file called rare_replace.dat
@@ -58,8 +56,6 @@ def read_and_rare_replace(fname):
                 outfile.write("_RARE_ " + fields[1] + "\n")
             else:
                 outfile.write(line + "\n")
-        else:
-            1 # do nothing
         l = infile.readline()
     outfile.close()
     infile.close()
