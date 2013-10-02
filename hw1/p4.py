@@ -6,34 +6,45 @@ from collections import defaultdict
 import math
 from count_freqs import Hmm
 
-def problem4():
-    '''problem 4 main code'''
+"""
+As a baseline, implement a simple named entity tagger that always produces the tag 
+y* = argmax(y) e(x|y)
+for each word x. Make sure your tagger uses the RARE word probabilities for rare 
+and unseen words. Your tagger should read in the counts ﬁle and the ﬁle ner_dev.dat
+(which is ner_dev.key without the tags) and produce output in the same format as
+the training ﬁle, but with an additional column in the end that contains the 
+log probability for each prediction.
+"""
+
+def problem4(count_file, dev_file):
+    """Implement a simple named entity tagger and output predictions."""
+
     try:
         input = file(sys.argv[1],"r")
     except IOError:
         sys.stderr.write("ERROR: Cannot read inputfile %s.\n" % arg)
         sys.exit(1)
-
-    # create hmm
+    
+    # Initialize a trigram counter
     counter = Hmm(3)
+    # Read counts
     counter.read_counts(input)
-    #counter.emission_counts[('mind','O')]  #6
-    emission_param('Carnival','I-MISC', counter)
+    # Write the predictions
+    counter.write_predicts(counter, dev_file, sys.stdout)
 
-    # Then print counts for all ngrams
-    n = 1
-    for ngram in counter.ngram_counts[n-1]:
-        ngramstr = " ".join(ngram)
-        print "%i %i-GRAM %s\n" %(counter.ngram_counts[n-1][ngram], n, ngramstr)
-        print counter.ngram_counts[n-1][ngram], n, ngramstr
-
-def emission_param(x,y,hmm_obj):
-    '''computes the ratio emission count to unigram count'''
-    # y is tag (ie IORG) while x is word
-    print x, y
-    print hmm_obj.emission_counts[(x,y)]
-    print hmm_obj.ngram_counts[0][x]
-    print hmm_obj.ngram_counts[0][y]
+def usage():
+    print """
+    python p4.py [counts_file] [dev_file] > [prediction_file]
+        Read in a counts file and dev input files, and produce output in format:
+        word tag log_probability
+        to prediction_file.
+    """
 
 if __name__ == "__main__":
-    problem4()
+
+    # expect exactly two arguments: the counts file and the dev file
+    if len(sys.argv) != 3:
+        usage()
+        sys.exit(2)
+
+    problem4(sys.argv[1], sys.argv[2])

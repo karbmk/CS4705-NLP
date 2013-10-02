@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
-__author__="Daniel Bauer <bauer@cs.columbia.edu>"
-__date__ ="$Sep 12, 2011"
+__author__="Daniel Bauer <bauer@cs.columbia.edu> & Emily Schultz <ess2183@columbia.edu"
+__date__ ="$Sep 28, 2013"
 
 import sys
 from collections import defaultdict
@@ -84,6 +84,7 @@ class Hmm(object):
         self.n = n
         self.emission_counts = defaultdict(int)
         self.ngram_counts = [defaultdict(int) for i in xrange(self.n)]
+        self.tag_counts = defaultdict(int)
         self.all_states = set()
 
     def train(self, corpus_file):
@@ -109,6 +110,11 @@ class Hmm(object):
             if ngram[-2][0] is None: # this is the first n-gram in a sentence
                 self.ngram_counts[self.n - 2][tuple((self.n - 1) * ["*"])] += 1
 
+        # add tag counts
+        for word, ne_tag in self.emission_counts:
+            self.tag_counts[ne_tag] += self.emission_counts[(word, ne_tag)]
+
+
     def write_counts(self, output, printngrams=[1,2,3]):
         """
         Writes counts to the output file object.
@@ -126,12 +132,51 @@ class Hmm(object):
                 ngramstr = " ".join(ngram)
                 output.write("%i %i-GRAM %s\n" %(self.ngram_counts[n-1][ngram], n, ngramstr))
 
+    def write_predicts(self, dev_file, output):
+    """Writes to output in: (word tag log_probability) format."""
+    dev_infile = file(dev_file, "r")
+
+    for line in dev_infile:
+        word = line.strip()
+        if word: # Nonempty line
+            if self.word_counts[word] < 5:
+                tag = self.entity_tagger("_RARE_")
+                lprob = math.log(self.e("_RARE_", tag))
+            else:
+                tag = self.simple_named_entity_tagger(word)
+                lprob = math.log(self.e(word, tag))
+            output.write("%s %s %f\n" %(word, tag, lprob))
+
+    def e(self, x, y):
+    """
+    Computes emission parameters
+    e(x|y) = Count(y -> x)/Count(y)
+    """
+    return self.emission_counts[(x,y)]/float(self.tag_counts[y])
+
+    def simple_named_entity_tagger(self, word_x):
+        """
+        Produces the tag
+        y* = argmax(y) e(x|y)
+        for each word x.
+        """
+        tag = "ERROR: NO TAG FOUND" # no tag found problem
+        prob = 0.0
+        for t in self.all_states:
+            cur_prob = self.e(word_x, tag)
+            if cur_prob > prob:
+                prob = cur_prob
+                tag = t
+        return tag
+
     def read_counts(self, corpusfile):
 
         self.n = 3
         self.emission_counts = defaultdict(int)
         self.ngram_counts = [defaultdict(int) for i in xrange(self.n)]
         self.all_states = set()
+        self.all_words = set()
+        self.word_counts = defaultdict(int)
 
         for line in corpusfile:
             parts = line.strip().split(" ")
@@ -141,6 +186,9 @@ class Hmm(object):
                 word = parts[3]
                 self.emission_counts[(word, ne_tag)] = count
                 self.all_states.add(ne_tag)
+                self.all_words.add(word)
+                self.tag_counts[ne_tag] += count
+                self.word_counts[word] += 1
             elif parts[1].endswith("GRAM"):
                 n = int(parts[1].replace("-GRAM",""))
                 ngram = tuple(parts[2:])
