@@ -1,0 +1,49 @@
+Emily Schultz (ess2183)
+COMS 4705 - Natural Language Processing
+September 27, 2013
+
+
+Homework 1: Programming Problems (Q4-6)
+
+*** I'm using my 5 "free" late days on this problem set. ***
+
+This code was written and runs on a computer using python 2.6.6. I've also tested it on the CLIC machines.
+
+
+REPORT OF RESULTS
+
+Question 4:
+Part1: how to run your code step by step
+
+To replace infrequent words (count(x) < 5) in the original training data file (ner_train.dat) with a common symbol _RARE_, run:
+python rare.py ner_train.dat
+
+This will produce the file: rare_replaced.dat
+which is identical to the training data file ner_train.dat except the _RARE_ keyword replaces words with counts < 5 (and blank lines in the input file are excluded for brevity).
+
+
+Part2: performance for your algorithm (including precision, recall, and F-score).
+
+
+Part3: observations and comments about your experimental results. 
+
+
+Part4: any additional information that is requested in the problem.
+
+
+
+
+Question 5:
+Part1: how to run your code step by step (make sure your code can run on CLIC). 
+Part2: performance for your algorithm (including precision, recall, and F-score). 
+Part3: observations and comments about your experimental results. 
+Part4: any additional information that is requested in the problem.
+
+
+
+
+Question 6:
+Part1: how to run your code step by step (make sure your code can run on CLIC). 
+Part2: performance for your algorithm (including precision, recall, and F-score). 
+Part3: observations and comments about your experimental results. 
+Part4: any additional information that is requested in the problem.
