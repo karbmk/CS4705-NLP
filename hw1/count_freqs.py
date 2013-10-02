@@ -297,7 +297,7 @@ class Hmm(object):
                     prob = self.pi_dict[(k, u, v)]
 
         prob = 0
-        u_tag = "ERROR: NO TAG FOUND"
+        u_tag = "ERROR: NO TAG FOUND" # should never return these, else uh-oh
         v_tag = "ERROR: NO TAG FOUND"
         for u in self.all_tags[sent[k - 1]]:
             for v in self.all_tags[sent[k]]:

@@ -55,9 +55,9 @@ def read_and_keywd_replace(fname):
             # Count(x) < 5 -> _RARE_
             if emission_counts[fields[0]] < 5:
                 if fields[0].isdigit(): #DIGIT
-                    outfile.write("_NUM_" + fields[1] + '\n')
+                    outfile.write("_NUM_ " + fields[1] + '\n')
                 elif not fields[0].islower(): #CAPITALIZED
-                    outfile.write("_CAP_" + fields[1] + '\n')
+                    outfile.write("_CAP_ " + fields[1] + '\n')
                 else: # RARE
                     outfile.write("_RARE_ " + fields[1] + "\n")
             else:

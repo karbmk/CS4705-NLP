@@ -122,11 +122,41 @@ The function that computes trigram estimates is in the Hmm class of count_freqs.
 Question 6:
 Part1: how to run your code step by step (make sure your code can run on CLIC). 
 
+1. Run:
+	python keywd.py ner_train.dat
+to produce the moretags_replace.dat file with capitals and numerals replaced, as well as rare keyword.
+
+2. Run:
+	python count_freqs_6.py moretags_replace.dat > ner_moretags.count
+to get the counts with the new _NUM_ and _CAP_ keywords introduced. 
+(count_freqs_6.py is the original count_freqs.py file from the class site).
+
+3. Run:
+	python p6.py ner_moretags.count ner_dev.dat > moretags_prediction_file
+to generate predictions.
+
+4. Run:
+	python eval_ne_tagger.py ner_dev.key moretags_prediction_file
+to evaluate the predictions with the tagger.
 
 Part2: performance for your algorithm (including precision, recall, and F-score). 
 
+Output from eval_ne_tagger.py (for simple named entity tagger):
+
+Found 19456 NEs. Expected 5931 NEs; Correct: 1601.
+
+		precision 	recall 		F1-Score
+Total:	 0.082288	0.269938	0.126128
+PER:	 0.000000	0.000000	0.000000
+Warning: prediction file does not contain any instances of entity type ORG.
+ORG:	 1.000000	0.000000	0.000000
+LOC:	 0.082394	0.872955	0.150576
+MISC:	 0.000000	0.000000	0.000000
+
 
 Part3: observations and comments about your experimental results. 
+
+My modified _RARE_ tagger with _CAP_ and _NUM_ got 1601 correct. It found 19456 named entities and expected 5931. Overall it was about on par with Q4, but a little better. Overall, precision was about .08(a little better than Q4), recall about .26 (worse than Q4), and F1-Score overall was 0.126 (much better than Q4).
 
 
 Part4: any additional information that is requested in the problem.
