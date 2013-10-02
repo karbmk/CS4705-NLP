@@ -85,6 +85,7 @@ class Hmm(object):
         self.emission_counts = defaultdict(int)
         self.ngram_counts = [defaultdict(int) for i in xrange(self.n)]
         self.tag_counts = defaultdict(int) # for simple tagger
+        self.word_counts = defaultdict(int)
         self.all_states = set()
         self.all_tags = defaultdict(list) # for viterbi
         self.pi_dict = dict([((0, '*', '*'), 1)]) # initialization step of viterbi
@@ -182,7 +183,6 @@ class Hmm(object):
         self.ngram_counts = [defaultdict(int) for i in xrange(self.n)]
         self.all_states = set()
         self.all_words = set()
-        self.word_counts = defaultdict(int)
 
         for line in corpusfile:
             parts = line.strip().split(" ")
@@ -251,8 +251,9 @@ class Hmm(object):
 
     def bp(self, k, u, v, sent):
         """For Viterbi algorithm with backpointers, bp function"""
-        prob = 0
-        tag = "ERROR: NO TAG FOUND"
+        prob = 0.0
+        tag = 'ERROR: TAG NOT FOUND'
+        
         for w in self.all_tags[sent[k - 2]]:
             cur_prob = self.pi(k - 1, w, u, sent) * self.q(w, u, v) * self.e(sent[k], v)
             if cur_prob > prob:
@@ -261,7 +262,7 @@ class Hmm(object):
         return tag
 
     def viterbi_read(self, dev_file):
-        """Writes to output in: (word tag log_probability) format."""
+        """For Viterbi algorithm, writes to output in: (word tag log_probability) format."""
         sent = list('*')
         vsent = list('*')
         dev_infile = file(dev_file, "r")
@@ -308,11 +309,12 @@ class Hmm(object):
                     u_tag = u
                     v_tag = v
 
-        trigram = {slen - 1: u_tag, slen: v_tag, 0: "*"}
+        trigram = {slen - 1: u_tag, slen: v_tag, 0: '*'}
         for k in range(slen - 2, 0, -1):
             trigram[k] = self.bp(k + 2, trigram[k + 1], trigram[k + 2], sent)
 
         return trigram
+
 
 
 def usage():

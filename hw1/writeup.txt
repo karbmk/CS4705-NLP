@@ -88,7 +88,7 @@ to test the trigram q() function (in count_freqs.py Hmm class) on the tri_prob_i
 
 3. Run:
 	python viterbi.py ner.counts ner_dev.dat > v_prediction_file
-to run the viterbi algorithm on ner.counts and ner_dev.dat
+to run the viterbi algorithm on ner.counts and ner_dev.dat and produce the v_prediction_file
 
 Part2: performance for your algorithm (including precision, recall, and F-score). 
 
