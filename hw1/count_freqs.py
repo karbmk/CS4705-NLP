@@ -154,7 +154,10 @@ class Hmm(object):
         Computes emission parameters
         e(x|y) = Count(y -> x)/Count(y)
         """
-        return self.emission_counts[(x, y)]/float(self.tag_counts[y])
+        if self.tag_counts[y] != 0:
+            return self.emission_counts[(x, y)]/float(self.tag_counts[y])
+        else:
+            return 0.0 # avoid division by zero error if tag_count is zero
 
     def simple_named_entity_tagger(self, word_x):
         """Returns the tag y* = argmax(y) e(x|y) for every word x."""
