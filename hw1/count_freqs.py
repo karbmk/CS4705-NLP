@@ -133,40 +133,37 @@ class Hmm(object):
                 output.write("%i %i-GRAM %s\n" %(self.ngram_counts[n-1][ngram], n, ngramstr))
 
     def write_predicts(self, dev_file, output):
-    """Writes to output in: (word tag log_probability) format."""
-    dev_infile = file(dev_file, "r")
+        """Writes to output in: (word tag log_probability) format."""
+        dev_infile = file(dev_file, "r")
 
-    for line in dev_infile:
-        word = line.strip()
-        if word: # Nonempty line
-            if self.word_counts[word] < 5:
-                tag = self.entity_tagger("_RARE_")
-                lprob = math.log(self.e("_RARE_", tag))
-            else:
-                tag = self.simple_named_entity_tagger(word)
-                lprob = math.log(self.e(word, tag))
-            output.write("%s %s %f\n" %(word, tag, lprob))
+        for line in dev_infile:
+            word = line.strip()
+            if word: # Nonempty line
+                if self.word_counts[word] >= 5:
+                    tag = self.simple_named_entity_tagger(word)
+                    lprob = math.log(self.e(word, tag))
+                else:
+                    tag = self.simple_named_entity_tagger("_RARE_")
+                    lprob = math.log(self.e("_RARE_", tag))
+                output.write("%s %s %f\n" %(word, tag, lprob))
 
     def e(self, x, y):
-    """
-    Computes emission parameters
-    e(x|y) = Count(y -> x)/Count(y)
-    """
-    return self.emission_counts[(x,y)]/float(self.tag_counts[y])
+        """
+        Computes emission parameters
+        e(x|y) = Count(y -> x)/Count(y)
+        """
+        return self.emission_counts[(x, y)]/float(self.tag_counts[y])
 
     def simple_named_entity_tagger(self, word_x):
-        """
-        Produces the tag
-        y* = argmax(y) e(x|y)
-        for each word x.
-        """
-        tag = "ERROR: NO TAG FOUND" # no tag found problem
+        """Returns the tag y* = argmax(y) e(x|y) for every word x."""
+
+        tag = "ERROR: NO BEST TAG FOUND" # if no tag found, uh-oh
         prob = 0.0
-        for t in self.all_states:
-            cur_prob = self.e(word_x, tag)
+        for y in self.all_states:
+            cur_prob = self.e(word_x, y)
             if cur_prob > prob:
+                tag = y
                 prob = cur_prob
-                tag = t
         return tag
 
     def read_counts(self, corpusfile):
@@ -187,7 +184,7 @@ class Hmm(object):
                 self.emission_counts[(word, ne_tag)] = count
                 self.all_states.add(ne_tag)
                 self.all_words.add(word)
-                self.tag_counts[ne_tag] += count
+                self.tag_counts[ne_tag] += self.emission_counts[(word, ne_tag)] 
                 self.word_counts[word] += 1
             elif parts[1].endswith("GRAM"):
                 n = int(parts[1].replace("-GRAM",""))

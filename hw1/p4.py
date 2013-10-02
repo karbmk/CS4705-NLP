@@ -7,13 +7,12 @@ import math
 from count_freqs import Hmm
 
 """
-As a baseline, implement a simple named entity tagger that always produces the tag 
+As a baseline, implement a simple named entity tagger that always produces the tag
 y* = argmax(y) e(x|y)
-for each word x. Make sure your tagger uses the RARE word probabilities for rare 
-and unseen words. Your tagger should read in the counts ﬁle and the ﬁle ner_dev.dat
-(which is ner_dev.key without the tags) and produce output in the same format as
-the training ﬁle, but with an additional column in the end that contains the 
-log probability for each prediction.
+for each word x. Make sure your tagger uses the RARE word probabilities for rare and unseen
+words. Your tagger should read in the counts file and the file ner_dev.dat and produce
+output in the same format as the training file, but with an additional column in the end
+that contains the log probability for each prediction.
 """
 
 def problem4(count_file, dev_file):
@@ -30,7 +29,7 @@ def problem4(count_file, dev_file):
     # Read counts
     counter.read_counts(input)
     # Write the predictions
-    counter.write_predicts(counter, dev_file, sys.stdout)
+    counter.write_predicts(dev_file, sys.stdout)
 
 def usage():
     print """
