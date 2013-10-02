@@ -196,7 +196,33 @@ class Hmm(object):
                 ngram = tuple(parts[2:])
                 self.ngram_counts[n-1][ngram] = count
                 
+    def q(self, y0, y1, y2):
+        """
+        Computes parameters
+        q(y2|y0,y1) = count(y0, y1, y2)/count(y0, y2)
+        for a given trigram y0 y1 y2.
+        """
+        return self.ngram_counts[2][(y0, y1, y2)]/self.ngram_counts[1][(y0, y1)]
 
+    def write_trigram_prob(self, tri_file, output):
+        """
+        Reads in lines of state trigrams y(i-2) y(i-1) y(i) (separated by space)
+        and prints the log probability for each trigram.
+        """
+        tri_infile = file(tri_file, "r")
+        l = tri_infile.readline()
+        while l:
+            line = l.strip()
+            if line: # Nonempty line
+                # Extract information from line.
+                # Each line has the format
+                # y(i-2) y(i-1) y(i)
+                fields = line.split(" ")
+                prob = math.log(self.q(fields[0], fields[1], fields[2]))
+                output.write("%s %s %s %f\n" %(fields[0], fields[1], fields[2], prob))
+            else: # Empty line
+                output.write("\n")
+            l = tri_infile.readline()
 
 def usage():
     print """
