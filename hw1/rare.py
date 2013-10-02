@@ -56,6 +56,8 @@ def read_and_rare_replace(fname):
                 outfile.write("_RARE_ " + fields[1] + "\n")
             else:
                 outfile.write(line + "\n")
+        else:
+            outfile.write("\n") # for matchup with eval script
         l = infile.readline()
     outfile.close()
     infile.close()

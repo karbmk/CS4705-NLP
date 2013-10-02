@@ -146,6 +146,8 @@ class Hmm(object):
                     tag = self.simple_named_entity_tagger("_RARE_")
                     lprob = math.log(self.e("_RARE_", tag))
                 output.write("%s %s %f\n" %(word, tag, lprob))
+            else: # for matchup with eval script
+                output.write("\n")
 
     def e(self, x, y):
         """
