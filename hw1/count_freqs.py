@@ -189,7 +189,7 @@ class Hmm(object):
                 self.emission_counts[(word, ne_tag)] = count
                 self.all_states.add(ne_tag)
                 self.all_words.add(word)
-                self.tag_counts[ne_tag] += self.emission_counts[(word, ne_tag)] 
+                self.tag_counts[ne_tag] += count 
                 self.word_counts[word] += 1
             elif parts[1].endswith("GRAM"):
                 n = int(parts[1].replace("-GRAM",""))
