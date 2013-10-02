@@ -19,7 +19,7 @@ def problem4(count_file, dev_file):
     """Implement a simple named entity tagger and output predictions."""
 
     try:
-        input = file(sys.argv[1],"r")
+        infile = file(count_file,"r")
     except IOError:
         sys.stderr.write("ERROR: Cannot read inputfile %s.\n" % arg)
         sys.exit(1)
@@ -27,7 +27,7 @@ def problem4(count_file, dev_file):
     # Initialize a trigram counter
     counter = Hmm(3)
     # Read counts
-    counter.read_counts(input)
+    counter.read_counts(infile)
     # Write the predictions
     counter.write_predicts(dev_file, sys.stdout)
 
