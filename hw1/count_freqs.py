@@ -84,8 +84,10 @@ class Hmm(object):
         self.n = n
         self.emission_counts = defaultdict(int)
         self.ngram_counts = [defaultdict(int) for i in xrange(self.n)]
-        self.tag_counts = defaultdict(int)
+        self.tag_counts = defaultdict(int) # for simple tagger
         self.all_states = set()
+        self.all_tags = defaultdict(list) # for viterbi
+        self.pi_dict = dict([((0, '*', '*'), 1)]) # initialization step of viterbi
 
     def train(self, corpus_file):
         """
@@ -154,7 +156,9 @@ class Hmm(object):
         Computes emission parameters
         e(x|y) = Count(y -> x)/Count(y)
         """
-        if self.tag_counts[y] != 0:
+        if x == '*' and y == '*':
+            return 1.0
+        elif self.tag_counts[y] != 0:
             return self.emission_counts[(x, y)]/float(self.tag_counts[y])
         else:
             return 0.0 # avoid division by zero error if tag_count is zero
@@ -191,10 +195,13 @@ class Hmm(object):
                 self.all_words.add(word)
                 self.tag_counts[ne_tag] += count 
                 self.word_counts[word] += 1
+                self.all_tags[word].append(ne_tag)
             elif parts[1].endswith("GRAM"):
                 n = int(parts[1].replace("-GRAM",""))
                 ngram = tuple(parts[2:])
                 self.ngram_counts[n-1][ngram] = count
+
+        self.all_tags['*'] = '*'
                 
     def q(self, y0, y1, y2):
         """
@@ -202,7 +209,10 @@ class Hmm(object):
         q(y2|y0,y1) = count(y0, y1, y2)/count(y0, y2)
         for a given trigram y0 y1 y2.
         """
-        return self.ngram_counts[2][(y0, y1, y2)]/self.ngram_counts[1][(y0, y1)]
+        if self.ngram_counts[1][(y0, y1)] != 0:
+            return self.ngram_counts[2][(y0, y1, y2)]/self.ngram_counts[1][(y0, y1)]
+        else:
+            return 0.0 # avoid division by zero error
 
     def write_trigram_prob(self, tri_file, output):
         """
@@ -223,6 +233,87 @@ class Hmm(object):
             else: # Empty line
                 output.write("\n")
             l = tri_infile.readline()
+
+    def pi(self, k, u, v, sent):
+        """For Viterbi algorithm, pi function"""
+        if k == 0 and u == '*' and v == '*':
+            return 1
+        elif (k, u, v) in self.pi_dict:
+            return self.pi_dict[(k, u, v)]
+        else:
+            prob = 0
+            for tag in self.all_tags[sent[k - 2]]:
+                cur_prob = self.pi(k - 1, tag, u, sent) * self.q(tag, u, v) * self.e(sent[k], v)
+                if cur_prob > prob:
+                    prob = cur_prob
+            self.pi_dict[(k, u, v)] = prob
+            return prob
+
+    def bp(self, k, u, v, sent):
+        """For Viterbi algorithm with backpointers, bp function"""
+        prob = 0
+        tag = "ERROR: NO TAG FOUND"
+        for w in self.all_tags[sent[k - 2]]:
+            cur_prob = self.pi(k - 1, w, u, sent) * self.q(w, u, v) * self.e(sent[k], v)
+            if cur_prob > prob:
+                prob = cur_prob
+                tag = w
+        return tag
+
+    def viterbi_read(self, dev_file):
+        """Writes to output in: (word tag log_probability) format."""
+        sent = list('*')
+        vsent = list('*')
+        dev_infile = file(dev_file, "r")
+        l = dev_infile.readline()
+        while l:
+            word = l.strip()
+            if word: # Nonempty line
+                sent.append(word)
+                if self.word_counts[word] < 5: # still do _RARE_
+                    vsent.append("_RARE_")
+                else:
+                    vsent.append(word)
+            else:
+                vsent.append('*')
+                sent.append('*')
+                vresults = self.viterbi(vsent)
+                for i in range(1, len(vsent) - 1): # avoid */STOP symbols
+                    print "%s %s %f" %(sent[i], vresults[i], math.log(self.pi_dict[i, vresults[i - 1], vresults[i]]))
+                print '\n'
+                # move on to the next
+                self.pi_dict.clear()
+                sent = list('*')
+                vsent = list('*')
+            l = dev_infile.readline()
+
+    def viterbi(self, sent):
+        slen = len(sent) - 2     # -2 because we added two * strings
+        for k in range(1, slen + 1):
+            for u in self.all_tags[sent[k - 1]]:
+                for v in self.all_tags[sent[k]]:
+                    self.pi(k, u, v, sent)
+                    prob = self.pi_dict[(k, u, v)]
+
+        prob = 0
+        u_tag = "ERROR: NO TAG FOUND"
+        v_tag = "ERROR: NO TAG FOUND"
+        for u in self.all_tags[sent[k - 1]]:
+            for v in self.all_tags[sent[k]]:
+                p = self.pi_dict[(slen, u, v)]
+                t = self.q(u, v, "STOP")
+                cur_prob = self.pi_dict[(slen, u, v)] * self.q(u, v, "STOP")
+                if cur_prob > prob:
+                    prob = cur_prob
+                    u_tag = u
+                    v_tag = v
+
+        trigram = {slen - 1: u_tag, slen: v_tag, 0: "*"}
+        for k in range(slen - 2, 0, -1):
+            trigram[k] = self.bp(k + 2, trigram[k + 1], trigram[k + 2], sent)
+
+        return trigram
+
 
 def usage():
     print """
