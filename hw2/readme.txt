@@ -17,11 +17,12 @@ Question 4:
     and 
       python count_cfg_freq.py parse_train_rare.dat > cfg_rare.counts
     to produce the counts of the rules used in the corpus with the _RARE_ keyword.
+    This takes about a minute.
 
   Part 2:
     If you wish, you can run:
       python pretty_print_tree.py parse_train_rare.dat
-    to see if the file is in the proper format.
+    to see the tree produced and check if the file is in the proper format.
     The script does not throw an error, so the tree is in the proper format. That's good.
 
   Part 3: 
@@ -30,14 +31,24 @@ Question 4:
   Part 4:
     None.
 
+
 Question 5:
+  Write rule parameters q and implement the CKY algorithm.
 
   Part 1:
+    First run Question 4 (above).
+    Then run:
+      python cky.py parse_dev.dat cfg_rare.counts > cky_output
+
+
+      python eval_parser.py parse_dev.key cky_output
+
   Part 2:
   Part 3:
   Part 4:
 
-Question 6
+
+Question 6:
 
   Part 1:
   Part 2:
