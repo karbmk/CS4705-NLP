@@ -7,7 +7,7 @@ import math
 import re
 import collections
 from collections import defaultdict
-import sys, json
+import sys
 
 def question4(count_file, tree_file):
     """
