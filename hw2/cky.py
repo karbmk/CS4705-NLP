@@ -9,6 +9,24 @@ import collections
 from collections import defaultdict
 import sys, json
 
+def question5(tree_file, count_file):
+    """The main method for question 5, running the CKY algorithm."""
+    # open the input files
+    count_infile = open(count_file, 'r')
+    tree_infile = open(tree_file, 'r')
+
+    # create the cky object and fill the dictionary
+    q5cky = CKY()
+    q5cky.fill_dicts(count_infile)
+    q5cky.fill_qml_dict()
+
+    # run the cky algorithm
+    q5cky.run_cky(tree_infile)
+
+    # close the input files
+    count_infile.close()
+    tree_infile.close()
+
 class CKY:
     """Class for the CKY Algorithm."""
 
@@ -114,6 +132,7 @@ class CKY:
         # get the rules using backpointers
         rules = []
         qkey = 'S'
+
         # some of the sentences are fragments
         if pi_dict[(1, n, 'S')] == 0.0:
             qmax = 0.0
@@ -121,6 +140,7 @@ class CKY:
                 if pi_dict[(1, n, x)] > qmax:
                     qmax = pi_dict[(1, n, x)]
                     qkey = x
+        # return the tree            
         return self.backp_tree(1, n, qkey, sentence, bp_dict)
 
     def run_cky(self, tree_infile):
@@ -137,24 +157,6 @@ class CKY:
         else:
             (s, y, z) = bp_dict[(start, end, non_terminal)]
             return [non_terminal, self.backp_tree(start, s, y, sentence, bp_dict), self.backp_tree(s+1, end, z, sentence, bp_dict)]
-
-def question5(tree_file, count_file):
-    """The main method for question 5, running the CKY algorithm."""
-    # open the input files
-    count_infile = open(count_file, 'r')
-    tree_infile = open(tree_file, 'r')
-
-    # create the cky object and fill the dictionary
-    q5cky = CKY()
-    q5cky.fill_dicts(count_infile)
-    q5cky.fill_qml_dict()
-
-    # run the cky algorithm
-    q5cky.run_cky(tree_infile)
-
-    # close the input files
-    count_infile.close()
-    tree_infile.close()
 
 def usage():
     sys.stderr.write("""
