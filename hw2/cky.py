@@ -114,6 +114,7 @@ class CKY:
         # get the rules using backpointers
         rules = []
         qkey = 'S'
+        # some of the sentences are fragments
         if pi_dict[(1, n, 'S')] == 0.0:
             qmax = 0.0
             for x in self.rule_dict['NONTERMINAL'].iterkeys():
@@ -125,8 +126,8 @@ class CKY:
     def run_cky(self, tree_infile):
         """Performs the CKY algorithm using the dictionaries of this cky object."""
         for line in tree_infile:
-            line = line.strip().split()
             sys.stderr.write('sentence: %s\n' %(line))
+            line = line.strip().split()
             print json.dumps(self.cky_alg(line))
 
     def backp_tree(self, start, end, non_terminal, sentence, bp_dict):
@@ -147,6 +148,7 @@ def question5(tree_file, count_file):
     q5cky = CKY()
     q5cky.fill_dicts(count_infile)
     q5cky.fill_qml_dict()
+
     # run the cky algorithm
     q5cky.run_cky(tree_infile)
 
@@ -156,8 +158,8 @@ def question5(tree_file, count_file):
 
 def usage():
     sys.stderr.write("""
-    Usage: python cky.py [train_file] [counts_file]
-        Perform the CKY algorithm.\n""")
+    Usage: python cky.py [sentence_file] [counts_file]
+        Perform the CKY algorithm on the given sentences using the counts.\n""")
 
 if __name__ == "__main__":
     # expect exactly two arguments: the counts file and the training data file
