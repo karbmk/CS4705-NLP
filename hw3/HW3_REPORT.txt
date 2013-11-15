@@ -9,14 +9,303 @@ Question 4
 
     To run 5 iterations of the EM algorithm for IBM model 1 and calculate the t parameters, run:
       python ibm1.py corpus.en corpus.de
-    where corpus.en is the english corpus file and corpus.de is the german corpus file. This takes a few minutes. The output is in the file "t_parameters".
+    where corpus.en is the english corpus file and corpus.de is the german corpus file. This takes a couple minutes. The output is in the file "t_parameters".
 
-    To print the list of the 10 foreign words with the highest t(f|e) parameter (and the parameter itself) for each English word e in devwords.txt, run:
+    To print the top 10 German words for each English word in devwords.txt, run:
       python top10.py devwords.txt
 
+
+
+
+
+
+
+
+
+
   Part 2:
+
+    The output from the top 10 for devwords.txt is in devwords_top10.txt and below:
+
+      English Word: i;
+      German Words:
+      ich 0.698157
+      , 0.073266
+      . 0.036777
+      m&ouml;chte 0.029566
+      da&szlig; 0.026533
+      habe  0.025276
+      mich  0.013403
+      mir 0.008514
+      die 0.006758
+      zu  0.006354
+
+      English Word: dog;
+      German Words:
+      &uuml;bersetzen 0.072613
+      delendum  0.072613
+      cato  0.072613
+      postalis  0.072613
+      k&uuml;chenlatein 0.072613
+      servitium 0.072613
+      esse  0.072613
+      stehen  0.072517
+      darf  0.072159
+      jetzt 0.070362
+
+      English Word: man;
+      German Words:
+      mann  0.269404
+      mensch  0.113999
+      wie 0.095078
+      ehrenwerter 0.045465
+      wortwahl  0.045465
+      , 0.026607
+      man 0.025734
+      ein 0.020785
+      mu&szlig; 0.020517
+      reagiert  0.014306
+
+      English Word: keys;
+      German Words:
+      herr  0.056055
+      faktors 0.051437
+      33  0.051437
+      steuerliche 0.051437
+      verringert  0.051437
+      belastung 0.051437
+      sch&ouml;n  0.051437
+      cassidy 0.051435
+      durchgef&uuml;hrt 0.051434
+      punkt 0.051314
+
+      English Word: bill;
+      German Words:
+      rechnung  0.164041
+      hotelrechnung 0.080299
+      sitzungswoche 0.080299
+      pr&auml;sentiert  0.080216
+      gegen&uuml;ber  0.077776
+      mir 0.066955
+      einem 0.054513
+      nur 0.042950
+      unzureichendes  0.027959
+      bezahlt 0.027875
+
+      English Word: naming;
+      German Words:
+      soll  0.155727
+      erw&auml;hnung  0.136034
+      meinen  0.131683
+      herstellernamens  0.073063
+      gedacht 0.073063
+      erg&auml;nzung  0.072320
+      beunruhigt  0.035733
+      erscheinen  0.035733
+      tatsache  0.035628
+      berichterstatterin  0.034965
+
+      English Word: anxiety;
+      German Words:
+      besorgnis 0.119075
+      ausdruck  0.089917
+      st&auml;rker  0.079146
+      strecke 0.064505
+      existiert 0.064505
+      angst 0.064499
+      bleiben 0.061603
+      zunehmen  0.054420
+      saal  0.047210
+      liegt 0.046043
+
+      English Word: junta;
+      German Words:
+      milit&auml;rjunta 0.406333
+      junta 0.255799
+      hatte 0.024719
+      festgenommen  0.022947
+      der 0.022318
+      herrschenden  0.019478
+      die 0.018068
+      man 0.015526
+      &ouml;lvorr&auml;te 0.011124
+      bedeute 0.011124
+
+      English Word: mediator;
+      German Words:
+      vermittler  0.204910
+      ansonsten 0.067881
+      einzig  0.067832
+      betrachten  0.067748
+      m&ouml;glichen  0.062799
+      dorthin 0.062110
+      stellen 0.060118
+      spricht 0.053300
+      entsandt  0.053253
+      t&auml;glich  0.049099
+
+      English Word: tribunal;
+      German Words:
+      gerichtshof 0.192169
+      kriegsgericht 0.124445
+      tribunal  0.071882
+      gab 0.070207
+      ein 0.061793
+      dem 0.035233
+      internationalen 0.029222
+      uneingeschr&auml;nkt  0.026879
+      g&uuml;ltig 0.026860
+      daher 0.020523
+
+      English Word: anniversary;
+      German Words:
+      jahrestag 0.352442
+      zehnten 0.119488
+      um  0.066452
+      redet 0.030321
+      so  0.029145
+      alleine 0.029143
+      manche  0.029123
+      am  0.027757
+      gar 0.026484
+      zehnj&auml;hrige  0.024604
+
+      English Word: dimension;
+      German Words:
+      dimension 0.670484
+      der 0.021560
+      die 0.019396
+      besch&auml;ftigungsinitiative 0.018402
+      sozialfonds 0.017082
+      folglich  0.016375
+      geboten 0.016094
+      erscheint 0.015552
+      wichtiger 0.014012
+      wichtiges 0.010598
+
+      English Word: depicted;
+      German Words:
+      wieder  0.198060
+      immer 0.197423
+      differenzierten 0.050460
+      holzschnittartig  0.050460
+      differenzierter 0.050460
+      ansonsten 0.050460
+      gef&auml;llt  0.050459
+      dargestellt 0.050453
+      gut 0.048991
+      zeichnet  0.043630
+
+      English Word: prefers;
+      German Words:
+      beibeh&auml;lt  0.060789
+      seiner  0.060236
+      akzeptieren 0.060128
+      verfahren 0.056220
+      wahl  0.044296
+      &auml;hnliche 0.042863
+      spezifischen  0.042863
+      inhaltlich  0.042862
+      standpunkte 0.042862
+      kompromi&szlig; 0.042861
+
+      English Word: visa;
+      German Words:
+      l&auml;nder 0.050159
+      visum-  0.042781
+      fl&uuml;chtlingspolitik 0.042781
+      visumpflicht  0.042781
+      erweiterte  0.042781
+      versch&auml;rft 0.042737
+      wird  0.035853
+      visumbestimmungen 0.035803
+      harmonisiert  0.035803
+      einreise  0.035803
+
+      English Word: wood;
+      German Words:
+      viel  0.083580
+      w&auml;ldern  0.077927
+      holz  0.077927
+      abfallholz  0.077927
+      finnischen  0.077927
+      nutzt 0.077927
+      liegen  0.077826
+      ; 0.072798
+      riesige 0.069122
+      wald  0.063963
+
+      English Word: agent;
+      German Words:
+      verringern  0.155354
+      ber&uuml;hrung  0.114624
+      kommen  0.112866
+      sind  0.039147
+      erreger 0.032913
+      ausschlie&szlig;t 0.032913
+      gef&auml;hrdung 0.032913
+      lie&szlig;e 0.032911
+      gekommen  0.032897
+      wahrscheinlich  0.031849
+
+      English Word: consume;
+      German Words:
+      viel  0.087644
+      energie 0.074599
+      uns 0.073526
+      verbrauchen 0.062887
+      verbraucht  0.053064
+      papierindustrie 0.026549
+      heizen  0.026549
+      f&uuml;rs 0.026549
+      schwerpunkt 0.026547
+      nordischen  0.026538
+
+      English Word: everyday;
+      German Words:
+      normalerweise 0.108923
+      funktioniert  0.108603
+      alltags 0.108308
+      hinaus  0.108159
+      zolls 0.107842
+      drogenbek&auml;mpfung 0.106534
+      dar&uuml;ber  0.104021
+      des 0.093079
+      gef&auml;ngnisstrafe  0.033241
+      normalen  0.033241
+
+      English Word: fix;
+      German Words:
+      bescheinigen  0.092537
+      festlegen 0.092537
+      gegeben 0.082780
+      einen 0.061597
+      abhaltung 0.042331
+      abgekartete 0.039741
+      nur-englisch  0.039741
+      zeitalter 0.039741
+      schnelle  0.039741
+      aufgeben  0.039741
+
+      English Word: ocean;
+      German Words:
+      tropfen 0.171519
+      stein 0.171519
+      hei&szlig;en  0.171493
+      dar&uuml;ber  0.090132
+      klaren  0.083609
+      uns 0.031163
+      m&uuml;ssen 0.031137
+      sind  0.030252
+      sein  0.030103
+      auf 0.028713
+
   Part 3:
   Part 4:
+
+
+
+
 
 Question 5
 
