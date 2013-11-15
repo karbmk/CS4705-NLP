@@ -1,0 +1,30 @@
+Emily Schultz (ess2183)
+CS4705 - Natural Language Processing
+
+Homework 3 Programming Problems
+
+Question 4
+
+  Part 1:
+
+    To perform 5 iterations of IBM1 and generate the t parameters, run:
+      python ibm1.py corpus.en corpus.de
+
+
+  Part 2:
+  Part 3:
+  Part 4:
+
+Question 5
+
+  Part 1:
+  Part 2:
+  Part 3:
+  Part 4:
+
+Question 6
+
+  Part 1:
+  Part 2:
+  Part 3:
+  Part 4:
