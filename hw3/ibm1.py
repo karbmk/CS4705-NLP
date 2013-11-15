@@ -2,7 +2,7 @@ __author__="Emily Schultz <ess2183@columbia.edu>"
 __date__="$Nov 15, 2013"
 
 import sys
-import json
+import pickle
 import collections
 from collections import defaultdict
 
@@ -49,9 +49,8 @@ def ibm1(english_file, german_file, iterations=5):
             t[en_word][ger_word] = 1./len(t[en_word])
 
     # output german words to a file (TODO this is sloppy, em - make it cleaner)
-    outfile = open("german_words", 'w')
-    outfile.write(json.dumps(ger))
-    outfile.close()
+    with open("german_words", 'wb') as handle:
+        pickle.dump(ger, handle)
 
     print "t initialized, now performing iterations"
     # IBM 1 ALGORITHM
@@ -113,10 +112,10 @@ def ibm1(english_file, german_file, iterations=5):
                 t[en_word][ger_word] = ger_counts[(ger_word, en_word)]/float(en_counts[en_word])
 
     print "iteration complete - outputting t parameters to file \"t_parameters\""
+    
     # output the t parameters to the file "t_parameters"
-    t_outfile = open("t_parameters", 'w')
-    t_outfile.write(json.dumps(t))
-    t_outfile.close()
+    with open("t_parameters", 'wb') as handle:
+        pickle.dump(t, handle)
 
 def usage():
     print """
