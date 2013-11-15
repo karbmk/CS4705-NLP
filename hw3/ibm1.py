@@ -48,7 +48,7 @@ def ibm1(english_file, german_file, iterations=5):
         for ger_word in (t[en_word].iterkeys()):
             t[en_word][ger_word] = 1./len(t[en_word])
 
-    # output german words to a file (TODO this is sloppy, em - make it cleaner)
+    # output german words to a file
     with open("german_words", 'wb') as handle:
         pickle.dump(ger, handle)
 

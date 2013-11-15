@@ -499,6 +499,20 @@ Question 6
 
 
   Part 1:
+
+    Run
+      python unscramble.py scrambled.en original.de
+
+    Next to evaluate, run:
+      python eval_scramble.py unscrambled.en original.en
+
   Part 2:
+
+    The evaluation script yields the following results:
+
+
   Part 3:
+
+ Comment on the efﬁciency of your method
+and any issues you saw while unscrambling
   Part 4:
