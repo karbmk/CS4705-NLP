@@ -509,10 +509,10 @@ Question 6
   Part 2:
 
     The evaluation script yields the following result:
-
+      Right   Total    Acc
+      87      100      0.870
 
   Part 3:
+    So the unscrambler using IBM Model 2 has about an 87% accuracy, which is pretty good. You could probably get it even better with better handling of words not in the q or t. It's hard to handle all the options well for if it's not in t or an unseen word. 
 
- Comment on the efﬁciency of your method
-and any issues you saw while unscrambling
   Part 4:
