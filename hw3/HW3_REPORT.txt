@@ -500,7 +500,7 @@ Question 6
 
   Part 1:
 
-    Run
+    To unscramble, run:
       python unscramble.py scrambled.en original.de
 
     Next to evaluate, run:
@@ -508,7 +508,7 @@ Question 6
 
   Part 2:
 
-    The evaluation script yields the following results:
+    The evaluation script yields the following result:
 
 
   Part 3:
