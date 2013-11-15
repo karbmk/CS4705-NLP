@@ -7,9 +7,12 @@ Question 4
 
   Part 1:
 
-    To perform 5 iterations of IBM1 and generate the t parameters, run:
+    To run 5 iterations of the EM algorithm for IBM model 1 and calculate the t parameters, run:
       python ibm1.py corpus.en corpus.de
+    where corpus.en is the english corpus file and corpus.de is the german corpus file. This takes a few minutes. The output is in the file "t_parameters".
 
+    To print the list of the 10 foreign words with the highest t(f|e) parameter (and the parameter itself) for each English word e in devwords.txt, run:
+      python top10.py devwords.txt
 
   Part 2:
   Part 3:
