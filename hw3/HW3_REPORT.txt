@@ -393,6 +393,13 @@ Question 5
 
 
   Part 1:
+    First, to run 5 iterations to calculate the t and q parameters with IBM Model 2 (where the t parameters are from Q4 using IBM Model 1), run:
+      python ibm2.py corpus.en corpus.de
+    where corpus.en is the english corpus file and corpus.de is the german corpus file. This takes several minutes. The output is in the file "t_parameters_2" and "q_parameters".
+
+    Next, 
+
+
   Part 2:
   Part 3:
   Part 4:
