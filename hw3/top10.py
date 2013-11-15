@@ -21,7 +21,7 @@ def top10(dev_file, top=10):
     print "t parameters successfully loaded from pickle file."
 
     # open the input file and the output file
-    dev_infile = open(dev_file, 'r')
+    dev_infile  = open(dev_file, 'r')
     dev_outfile = open("devwords_top10.txt", 'w')
 
     # iterate through the english words in the dev_file
@@ -55,5 +55,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         usage()
         sys.exit(2)
-    #translations(sys.argv[1])
+
     top10(sys.argv[1])

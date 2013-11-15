@@ -1,0 +1,80 @@
+resumption of the session
+wiederaufnahme der sitzungsperiode
+[1, 2, 4]
+
+i declare resumed the session of the european parliament adjourned on thursday , 28 march 1996 .
+ich erkl&auml;re die am donnerstag , den 28. m&auml;rz 1996 unterbrochene sitzungsperiode des europ&auml;ischen parlaments f&uuml;r wiederaufgenommen .
+[1, 2, 4, 12, 12, 13, 4, 14, 15, 16, 2, 5, 10, 8, 9, 2, 3, 17]
+
+welcome
+begr&uuml;&szlig;ung
+[1]
+
+i bid you a warm welcome !
+herzlich willkommen !
+[5, 2, 7]
+
+approval of the minutes
+genehmigung des protokolls
+[1, 1, 1]
+
+the minutes of the sitting of thursday , 28 march 1996 have been distributed .
+das protokoll der sitzung vom donnerstag , den 28. m&auml;rz 1996 wurde verteilt .
+[2, 2, 3, 5, 10, 7, 8, 1, 9, 10, 11, 14, 14, 15]
+
+are there any comments ?
+gibt es einw&auml;nde ?
+[2, 2, 4, 5]
+
+points 16 and 17 now contradict one another whereas the voting showed otherwise .
+die punkte 16 und 17 widersprechen sich jetzt , obwohl es bei der abstimmung anders aussah .
+[10, 1, 2, 3, 4, 6, 9, 5, 14, 6, 6, 4, 10, 11, 6, 6, 14]
+
+i shall be passing on to you some comments which you could perhaps take up with regard to the voting .
+ich werde ihnen die entsprechenden anmerkungen aush&auml;ndigen , damit sie das eventuell bei der abstimmung &uuml;bernehmen k&ouml;nnen .
+[1, 2, 7, 19, 4, 9, 4, 10, 20, 7, 0, 4, 17, 19, 20, 4, 12, 21]
+
+i will have to look into that , mrs oomen-ruijten .
+das mu&szlig; ich erst einmal kl&auml;ren , frau oomen-ruijten .
+[7, 5, 1, 10, 5, 10, 8, 9, 10, 11]
+
+i cannot say anything at this stage .
+das kann ich so aus dem stand nicht sagen .
+[6, 2, 1, 4, 4, 7, 7, 2, 3, 8]
+
+we will consider the matter .
+wir werden das &uuml;berpr&uuml;fen .
+[1, 2, 0, 3, 6]
+
+mr president , it concerns the speech made last week by mr fischler on bse and reported in the minutes .
+es geht um die erkl&auml;rung von herrn fischler zu bse , die im protokoll festgehalten wurde .
+[4, 13, 17, 6, 17, 11, 1, 13, 14, 15, 3, 6, 18, 20, 17, 9, 21]
+
+perhaps the commission or you could clarify a point for me .
+vielleicht k&ouml;nnten die kommission oder sie mir einen punkt erl&auml;utern .
+[1, 6, 2, 3, 4, 5, 11, 8, 9, 7, 12]
+
+it would appear that a speech made at the weekend by mr fischler indicates a change of his position .
+offensichtlich bedeutet die erkl&auml;rung von herrn fischler vom wochenende eine &auml;nderung der haltung der kommission .
+[3, 13, 9, 10, 11, 12, 13, 3, 10, 5, 16, 17, 19, 17, 10, 20]
+
+i welcome this change because he has said that he will eat british beef and that the ban was imposed specifically for economic and political reasons .
+ich begr&uuml;&szlig;e diese &auml;nderung , denn er sagte , da&szlig; er britisches rindfleisch essen w&uuml;rde und da&szlig; das einfuhrverbot insbesondere aus wirtschaftlichen und politischen gr&uuml;nden verh&auml;ngt wurde .
+[1, 2, 3, 4, 9, 5, 6, 8, 9, 9, 6, 12, 14, 12, 12, 15, 9, 18, 12, 21, 26, 23, 15, 25, 26, 12, 19, 27]
+
+could somebody clarify that he has actually said this please , mr president , because it is a change of views .
+herr pr&auml;sident , k&ouml;nnte festgestellt werden , ob er das tats&auml;chlich gesagt hat , denn das w&uuml;rde eine &auml;nderung der haltung der kommission bedeuten .
+[12, 13, 11, 1, 2, 2, 11, 2, 5, 17, 7, 8, 6, 11, 15, 17, 2, 18, 19, 20, 2, 20, 2, 2, 22]
+
+mr sturdy , i cannot see what that has to do with the minutes .
+herr kollege , ich kann nicht erkennen , was das mit dem protokoll zu tun hat .
+[1, 2, 3, 4, 5, 5, 2, 3, 7, 14, 12, 12, 14, 10, 11, 9, 15]
+
+mr president , on exactly the same point as mr sturdy has raised .
+herr pr&auml;sident , zum gleichen punkt , den auch herr sturdy angesprochen hat .
+[1, 2, 3, 11, 7, 8, 3, 6, 11, 1, 11, 13, 12, 14]
+
+if commission fischler has made this statement , then he has said that it is not a matter of public health .
+wenn herr kommissar fischler diese erkl&auml;rung abgegeben hat , dann bedeutet dies , da&szlig; es sich nicht um eine angelegenheit der &ouml;ffentlichen gesundheit handelt .
+[1, 7, 3, 3, 6, 7, 7, 4, 8, 9, 3, 6, 8, 13, 14, 4, 16, 18, 17, 18, 19, 20, 21, 3, 22]
+
