@@ -382,9 +382,10 @@ Question 4
 
   Part 3:
 
-    All of the 20 alignments from my IBM Model 1 output ("align20") match up with the alignments from the sample output ("alignment_sample_model1.txt"). This means my code is correct (or at least any error in my code is not highlighted in the first twenty sentences of the training data);
+    The first 10 alignments from my IBM Model 1 output ("align20") match up with the alignments from the sample output ("alignment_sample_model1.txt"). This means my code is correct (or at least any error in my code is not highlighted in the first twenty sentences of the training data);
 
   Part 4:
+
     By using a pickle file for my t and list of german words, I was able to greatly reduce runtime. Keep in mind, however, that this file must be present (ie it cannot be deleted after running part 1 of question 4) since the other parts depend upon it.
 
 
@@ -396,7 +397,9 @@ Question 5
   Part 3:
   Part 4:
 
+
 Question 6
+
 
   Part 1:
   Part 2:

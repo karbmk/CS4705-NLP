@@ -56,33 +56,32 @@ def calc_alignment(en_line, ger_line, t, ger):
     # split the sentences
     en_split  = str.split(en_line)
     ger_split = str.split(ger_line)
-
-    # TODO: UPDATE THIS LOGIC
-
+    
     # iterate through german sentence indexes
-    for ger_i in range(0,len(ger_split)):
+    for ger_i in range(0, len(ger_split)):
 
-        # find max probability
+        # find max probability over all english words
         max_prob = 0.0
-        maxi = 0
+        max_i = 0
 
         # check the 'NULL'
         if ger_split[ger_i] in t['NULL']:
             max_prob = t['NULL'][ger_split[ger_i]]
 
         # iterate through english sentence indexes
-        for en_i in range(0,len(en_split)):
+        for en_i in range(0, len(en_split)):
 
-            curr = 0.0
-            if en_split[en_i] in t and ger_split[ger_i] in ger:
-                if ger_split[ger_i] in t[en_split[en_i]]:
-                    curr = t[en_split[en_i]][ger_split[ger_i]]
-            if curr > max_prob:
-                maxi = en_i + 1
-                max_prob = curr
+            cur_prob = 0.0
+            if en_split[en_i] in t and ger_split[ger_i] in ger and ger_split[ger_i] in t[en_split[en_i]]:
+                cur_prob = t[en_split[en_i]][ger_split[ger_i]]
+
+            # if cur_prob is the new max, update the max
+            if cur_prob > max_prob:
+                max_i = en_i + 1
+                max_prob = cur_prob
 
         # append the most likely to the alignment
-        alignment.append(maxi)
+        alignment.append(max_i)
     return alignment
 
 def usage():
