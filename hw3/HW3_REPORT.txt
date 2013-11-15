@@ -3,7 +3,9 @@ CS4705 - Natural Language Processing
 
 Homework 3 Programming Problems
 
+
 Question 4
+
 
   Part 1:
 
@@ -379,13 +381,15 @@ Question 4
       [1, 7, 3, 3, 6, 7, 7, 4, 8, 9, 3, 6, 8, 13, 14, 4, 16, 18, 17, 18, 19, 20, 21, 3, 22]
 
   Part 3:
+
+    All of the 20 alignments from my IBM Model 1 output ("align20") match up with the alignments from the sample output ("alignment_sample_model1.txt"). This means my code is correct (or at least any error in my code is not highlighted in the first twenty sentences of the training data);
+
   Part 4:
-
-
-
+    By using a pickle file for my t and list of german words, I was able to greatly reduce runtime. Keep in mind, however, that this file must be present (ie it cannot be deleted after running part 1 of question 4) since the other parts depend upon it.
 
 
 Question 5
+
 
   Part 1:
   Part 2:

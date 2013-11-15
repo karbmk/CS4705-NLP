@@ -57,6 +57,8 @@ def calc_alignment(en_line, ger_line, t, ger):
     en_split  = str.split(en_line)
     ger_split = str.split(ger_line)
 
+    # TODO: UPDATE THIS LOGIC
+
     # iterate through german sentence indexes
     for ger_i in range(0,len(ger_split)):
 
