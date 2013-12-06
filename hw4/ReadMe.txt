@@ -12,7 +12,7 @@ Question 4
     To evaluate the performance run:
       python eval_tagger.py tag_dev.key tag_dev.out
   Part 2:
-    Of the 2459 words to tag, my program gest 2226 correct, for an accuracy of ~ 90.5 %.
+    Of the 2459 words to tag, my program got 2226 correct, for an accuracy of ~ 90.5 %.
     Output from eval_tagger.py:
       2226 2459 0.905246034974
   Part 3:
@@ -28,7 +28,11 @@ Question 5
     To evaluate the performance run:
       python eval_tagger.py tag_dev.key tag_dev_5.out
   Part 2:
+    Of the 2459 words to tag, the newly model got 2265 correct, for an accuracty of ~ 92 %.
+    Output from eval_tagger.py:
+      2265 2459 0.921106140708
   Part 3:
+    The result of this model is around 92% correct. This is ~2% improvement from Q4, where 39 more tags were correctly determined.
   Part 4:
 
 Question 6

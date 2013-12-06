@@ -68,14 +68,14 @@ def get_features(histories, sentence, model):
         if history_list and history_list[2] != 'STOP':
             pos = int(history_list[0]) - 1
 
-            # get the word
+            # get the word and the tag
             word = sentence[pos].split()[0]
-
-            # get the tag
             tag = history_list[2]
+
             weight = 0
-            standard = ['BIGRAM:'+history_list[1]+':'+tag, 'TAG:'+word+':'+tag]
-            features = features_set(word, tag, standard)
+            bigram = 'BIGRAM:' + history_list[1] + ':' + tag
+            t = 'TAG:' + word + ':' + tag
+            features = features_set(word, tag, [bigram, t])
 
             # calculate the weight for this history
             for feature in features:
@@ -87,11 +87,11 @@ def get_features(histories, sentence, model):
 def features_set(word, tag, features):
     """Return all model features."""
     # suffixes
-    features.extend(['SUFFIX:'+word[-3:]+':3:'+tag, 'SUFFIX:'+word[-2:]+':2:'+tag, 'SUFFIX:'+word[-1:]+':1:'+tag])
+    features.extend(['SUFFIX:' + word[-3:] + ':3:' + tag, 'SUFFIX:' + word[-2:] + ':2:' + tag, 'SUFFIX:' + word[-1:] + ':1:' + tag])
     # prefixes
-    features.extend(['PREFIX:'+word[:3]+':3:'+tag, 'PREFIX:'+word[:2]+':2:'+tag, 'PREFIX:'+word[:1]+':1:'+tag])
+    features.extend(['PREFIX:' + word[:3] + ':3:' + tag, 'PREFIX:' + word[:2] + ':2:' + tag, 'PREFIX:' + word[:1] + ':1:' + tag])
     # length
-    features.append('LEN:'+str(len(word))+':'+tag)
+    features.append('LEN:' + str(len(word)) + ':' + tag)
 
     lo = string.lowercase
     up = string.uppercase
