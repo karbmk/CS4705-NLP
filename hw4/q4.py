@@ -13,24 +13,31 @@ def assign_tags(model, untagged_file, output_file):
     # run the given processes
     enum_server = subprocess.Popen(['python', 'tagger_history_generator.py', 'ENUM'], stdin=PIPE, stdout=PIPE)
     history_server = subprocess.Popen(['python', 'tagger_decoder.py', 'HISTORY'], stdin=PIPE, stdout=PIPE)
+
     # open the files
     untag_infile = open(untagged_file, 'r')
     outfile = open(output_file, 'w')
+
     # read each line of the untagged file
     sentence = ''
     for line in untag_infile:
+
         # get each word in the sentence
         if len(line) > 1:
             sentence += line
+
         # now we've got the whole sentence
         else:
             sentence = sentence[:-1]
+
             # get the possible histories
             histories = call(enum_server, sentence).split('\n')
             sentence = sentence.split()
             scores = get_features(histories, sentence, model)
+
             # find the best tags
             tags = call(history_server, scores).split('\n')
+
             # write to the outfile 
             for i in range(0, len(sentence)):
                 parsed = tags[i].split()
@@ -48,7 +55,8 @@ def call(process, stdin):
     line = ''
     while 1:
         l = process.stdout.readline()
-        if not l.strip(): break
+        if not l.strip(): 
+            break
         line += l
     return line
 
@@ -59,13 +67,16 @@ def get_features(histories, sentence, model):
         history_list = history.split()
         if history_list and history_list[2] != 'STOP':
             pos = int(history_list[0]) - 1
+
             # get the word
             word = sentence[pos].split()[0]
+
             # get the tag
             tag = history_list[2]
             weight = 0
             standard = ['BIGRAM:'+history_list[1]+':'+tag, 'TAG:'+word+':'+tag]
             features = features_set(word, tag, standard)
+
             # calculate the weight for this history
             for feature in features:
                 if feature in model:
@@ -81,12 +92,14 @@ def features_set(word, tag, features):
     features.extend(['PREFIX:'+word[:3]+':3:'+tag, 'PREFIX:'+word[:2]+':2:'+tag, 'PREFIX:'+word[:1]+':1:'+tag])
     # length
     features.append('LEN:'+str(len(word))+':'+tag)
+
     lo = string.lowercase
     up = string.uppercase
     num = string.digits
     pun = string.punctuation
+
     # find the word case/type
-    for i in range(0,len(word)):
+    for i in range(0, len(word)):
         if i == 0:
             if word[i].lower() == word[i]:
                 type = 'LO'
@@ -124,6 +137,7 @@ def map_model(model_file):
     """Create model dictionary using the model file."""
     infile = open(model_file, 'r')
     model = defaultdict(int)
+
     # read in each line of the file
     for line in infile:
         line_list = line.split()
