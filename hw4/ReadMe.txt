@@ -22,9 +22,9 @@ Question 5
 
   Part 1:
     Run:
-      python q5.py tag_train.dat q5.model
+      python q5.py tag_train.dat suffix_tagger.model
     Then run:
-      python q4.py q5.model tag_dev.dat tag_dev_q5.out
+      python q4.py suffix_tagger.model tag_dev.dat tag_dev_q5.out
     To evaluate the performance run:
       python eval_tagger.py tag_dev.key tag_dev_q5.out
   Part 2:
@@ -32,8 +32,7 @@ Question 5
     Output from eval_tagger.py:
       2265 2459 0.921106140708
   Part 3:
-    The result of this model is around 92% correct. This is ~2% improvement from Q4, where 39 more tags were correctly determined.
-  Part 4:
+    The result of this model is around 92% correct. This is ~2% improvement from Q4, where 39 more tags were correctly determined. Clearly this helped the output, although the change wasn't HUGE.
 
 Question 6
 
