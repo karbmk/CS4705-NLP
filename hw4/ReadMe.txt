@@ -24,9 +24,9 @@ Question 5
     Run:
       python q5.py tag_train.dat q5.model
     Then run:
-      python q4.py q5.model tag_dev.dat tag_dev_5.out
+      python q4.py q5.model tag_dev.dat tag_dev_q5.out
     To evaluate the performance run:
-      python eval_tagger.py tag_dev.key tag_dev_5.out
+      python eval_tagger.py tag_dev.key tag_dev_q5.out
   Part 2:
     Of the 2459 words to tag, the newly model got 2265 correct, for an accuracty of ~ 92 %.
     Output from eval_tagger.py:
@@ -42,3 +42,5 @@ Question 6
   Part 3:
   Part 4:
 
+Question 7
+  I totally didn't do it. 

@@ -4,7 +4,6 @@
 
 import sys
 import subprocess
-import string
 from collections import defaultdict
 from subprocess import PIPE
 
