@@ -1,5 +1,6 @@
 # Emily Schultz, ess2183
-# COMS 4705 
+# COMS 4705
+# Q4
 
 import sys
 import subprocess
@@ -64,7 +65,7 @@ def get_features(histories, sentence, model):
             tag = history_list[2]
             weight = 0
             standard = ['BIGRAM:'+history_list[1]+':'+tag, 'TAG:'+word+':'+tag]
-            features = features_set(word, tag, standard, pos)
+            features = features_set(word, tag, standard)
             # calculate the weight for this history
             for feature in features:
                 if feature in model:
@@ -72,7 +73,7 @@ def get_features(histories, sentence, model):
             result += (history + ' ' + str(weight) + '\n')
     return result[:-1]
 
-def features_set(word, tag, features, i):
+def features_set(word, tag, features):
     """Return all model features."""
     # suffixes
     features.extend(['SUFFIX:'+word[-3:]+':3:'+tag, 'SUFFIX:'+word[-2:]+':2:'+tag, 'SUFFIX:'+word[-1:]+':1:'+tag])
@@ -84,11 +85,12 @@ def features_set(word, tag, features, i):
     up = string.uppercase
     num = string.digits
     pun = string.punctuation
+    # find the word case/type
     for i in range(0,len(word)):
         if i == 0:
-            if string.find(lo, word[i]) != -1:
+            if word[i].lower() == word[i]:
                 type = 'LO'
-            elif string.find(up, word[i]) != -1:
+            elif word[i].upper() == word[i]:
                 type = 'SEN'
             elif string.find(num, word[i]) != -1:
                 type = 'NUM'
@@ -105,9 +107,9 @@ def features_set(word, tag, features, i):
                 type = 'MIX'
                 break
             elif string.find(pun, word[i]) == -1 and type == 'PUN':
-                if string.find(lo, word[i]) != -1:
+                if word[i].lower() == word[i]:
                     type = 'LO'
-                elif string.find(up, word[i]) != -1:
+                elif word[i].upper() == word[i]:
                     type = 'UP'
                 elif string.find(num, word[i]) != -1:
                     type = 'NUM'

@@ -7,17 +7,16 @@ Homework 4 Programming Assignment
 Question 4
 
   Part 1:
-
     Run:
       python q4.py tag.model tag_dev.dat tag_dev.out
-
-
     To evaluate the performance run:
       python eval_tagger.py tag_dev.key tag_dev.out
-
   Part 2:
+    Of the 2459 words to tag, my program gest 2226 correct, for an accuracy of ~ 90.5 %.
+    Output from eval_tagger.py:
+      2226 2459 0.905246034974
   Part 3:
-  Part 4:
+    The result of this model is around 90% correct, which is fairly accurate. 
 
 Question 5
 
