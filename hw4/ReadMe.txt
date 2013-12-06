@@ -16,11 +16,17 @@ Question 4
     Output from eval_tagger.py:
       2226 2459 0.905246034974
   Part 3:
-    The result of this model is around 90% correct, which is fairly accurate. 
+    The result of this model is around 90% correct, which is fairly accurate.
 
 Question 5
 
   Part 1:
+    Run:
+      python q5.py tag_train.dat q5.model
+    Then run:
+      python q4.py q5.model tag_dev.dat tag_dev_5.out
+    To evaluate the performance run:
+      python eval_tagger.py tag_dev.key tag_dev_5.out
   Part 2:
   Part 3:
   Part 4:
